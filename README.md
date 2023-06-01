@@ -2,6 +2,11 @@
 
 > A companion action for the Primer Release Notifier app
 
+## Setup
+
+1. Install https://github.com/apps/primer-release-notifier in your repository
+2. Add `.github/workflows/handle-primer-release.yml` with content as shown below
+
 ## Usage
 
 ```yaml
@@ -20,6 +25,8 @@ jobs:
         with:
           components: ActionList, ActionMenu
 
+      # Example: When either `ActionList` or `ActionMenu` was changed, log out the version and 
+      #          the logs for only these two components
       - if: ${{ needs.filter.outputs.hasComponentChanges }}
         run: |
           # example release payload for reference:
