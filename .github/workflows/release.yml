@@ -27,6 +27,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "build: updated dist/run.cjs"
+      - run: npm i semantic-release-plugin-github-breaking-version-tag
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
