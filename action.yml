@@ -1,0 +1,15 @@
+name: Primer release filter
+description: "Get changelogs for only the components you care about"
+branding:
+  icon: "filter"
+  color: gray-dark
+outputs:
+  hasComponentChanges:
+    description: "True if there are any changes. Otherwise not set."
+  changelogsByComponent:
+    description: "JSON string for the changelogs by component."
+  changelogsByComponentMarkdown:
+    description: "Markdown text for the changelogs by component."
+runs:
+  using: "node16"
+  main: "dist/run.cjs"
