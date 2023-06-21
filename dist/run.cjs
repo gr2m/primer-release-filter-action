@@ -2218,11 +2218,11 @@ function main(core2, event2) {
   for (const changelog of changelogs) {
     const lines = changelog.split(/\n\s*/).filter(Boolean);
     const lastLine = lines.at(-1);
-    if (!lastLine.startsWith("Changed components:")) {
+    if (!lastLine.startsWith("<!-- Changed components:")) {
       continue;
     }
     lines.pop();
-    const components = lastLine.substring("Changed components:".length).trim().split(/\s*,\s*/g);
+    const components = lastLine.slice("<!-- Changed components:".length, "-->".length * -1).trim().split(/\s*,\s*/g);
     if (components[0] === "_none_") {
       continue;
     }
