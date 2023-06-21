@@ -24,21 +24,21 @@ test("with some components", () => {
 
 -   First change
 
-    Changed components: One, Two, Three
+    <!-- Changed components: One, Two, Three -->
 
 -   Second change
 
-    Changed components: One, Three
+    <!-- Changed components: One, Three -->
 
 -   Third change
 
-    Changed components: _none_
+    <!-- Changed components: _none_ -->
 
 -   Fourth change
 
     more info
 
-    Changed components: One, Two
+    <!-- Changed components: One, Two -->
 `;
 
   const setOutput = mock.fn();
