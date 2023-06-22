@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: filter-release-changelogs
-        uses: gr2m/primer-release-filter-action@v1
+        uses: gr2m/primer-release-filter-action@v2
         with:
           components: ActionList, ActionMenu
 
