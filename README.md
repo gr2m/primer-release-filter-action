@@ -25,15 +25,20 @@ jobs:
         with:
           components: ActionList, ActionMenu
 
-      # Example: When either `ActionList` or `ActionMenu` was changed, log out the version and
-      #          the logs for only these two components
+      # Example: When either `ActionList` or `ActionMenu` was changed, create a new issue with the change logs
       - if: ${{ steps.filter-release-changelogs.outputs.hasComponentChanges }}
-        run: |
+        uses: octokit/request-action@v2.x
+        with:
+          # https://docs.github.com/en/rest/issues/issues#create-an-issue
+          route: POST /repos/{repository}/issues
+          repository: ${{ github.repository }}
           # example release payload for reference:
           # https://github.com/octokit/webhooks/blob/70fafcfab3a6d54e45f3a2a8370c809fe9ee28c0/payload-examples/api.github.com/release/created.payload.json
-          echo ${{ github.event.client_payload.release.tag_name }}
-          # wrap with "
-          echo "${{ steps.filter-release-changelogs.outputs.changelogsByComponentMarkdown }}"
+          title: "primer/react ${{ github.event.client_payload.release.tag_name }}"
+          body: |
+            "${{ steps.filter-release-changelogs.outputs.changelogsByComponentMarkdown }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Inputs
