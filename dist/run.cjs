@@ -2249,7 +2249,9 @@ function toMarkdown(changelogsByComponent, event2) {
     return `### ${component}
 
 - ${changelogs.join("\n- ")}`;
-  }).join("\n\n") + "\n\nFull release notes: ${event.client_payload.release.html_url}";
+  }).join("\n\n") + `
+
+Full release notes: ${event2.client_payload.release.html_url}`;
 }
 function yamlEscape(string) {
   return string.replace(/"/g, '""');
