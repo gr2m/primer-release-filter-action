@@ -51,7 +51,7 @@ export function main(core, event) {
   );
   core.setOutput(
     "changelogsByComponentMarkdown",
-    toMarkdown(changelogsByComponent)
+    yamlEscape(toMarkdown(changelogsByComponent))
   );
 }
 
@@ -63,4 +63,8 @@ function toMarkdown(changelogsByComponent) {
 - ${changelogs.join("\n- ")}`;
     })
     .join("\n\n");
+}
+
+function yamlEscape(string) {
+  return string.replace(/"/g, '""');
 }
