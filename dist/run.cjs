@@ -2241,14 +2241,18 @@ function main(core2, event2) {
   );
   core2.setOutput(
     "changelogsByComponentMarkdown",
-    yamlEscape(toMarkdown(changelogsByComponent))
+    yamlEscape(toMarkdown(changelogsByComponent, event2))
   );
 }
-function toMarkdown(changelogsByComponent) {
+function toMarkdown(changelogsByComponent, event2) {
   return Object.entries(changelogsByComponent).map(([component, changelogs]) => {
     return `### ${component}
 
-- ${changelogs.join("\n- ")}`;
+- ${changelogs.join("\n- ")}
+
+---
+
+Full release notes: ${event2.client_payload.release.html_url}`;
   }).join("\n\n");
 }
 function yamlEscape(string) {
