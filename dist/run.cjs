@@ -2212,13 +2212,13 @@ var import_core = __toESM(require_core(), 1);
 
 // main.js
 function main(core2, event2) {
-  const body = event2.release.body;
+  const body = event2.client_payload.release.body;
   const [ignore_, ...changelogs] = body.split(/^-   /gm);
   const changelogsByComponent = {};
   for (const changelog of changelogs) {
     const lines = changelog.split(/\n\s*/).filter(Boolean);
     const lastLine = lines.at(-1);
-    if (!lastLine.startsWith("<!-- Changed components:")) {
+    if (!lastLine?.startsWith("<!-- Changed components:")) {
       continue;
     }
     lines.pop();
