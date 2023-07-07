@@ -2253,5 +2253,5 @@ function toMarkdown(changelogsByComponent) {
 }
 
 // run.js
-var event = JSON.parse((0, import_node_fs.readFileSync)(process.env.GITHUB_EVENT, "utf8"));
+var event = JSON.parse((0, import_node_fs.readFileSync)(process.env.GITHUB_EVENT_PATH, "utf8"));
 main(import_core.default, event);
