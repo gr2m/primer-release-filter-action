@@ -60,9 +60,13 @@ function toMarkdown(changelogsByComponent) {
     .map(([component, changelogs]) => {
       return `### ${component}
 
-- ${changelogs.join("\n- ")}`;
+- ${changelogs.map(escapeGitHubUsername).join("\n- ")}`;
     })
     .join("\n\n");
+}
+
+function escapeGitHubUsername(string) {
+  return string.replace(/@([\w-]+)/g, "[@$1](https://github.com/$1)");
 }
 
 function yamlEscape(string) {
