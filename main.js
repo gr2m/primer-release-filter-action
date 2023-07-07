@@ -60,13 +60,9 @@ function toMarkdown(changelogsByComponent, event) {
     .map(([component, changelogs]) => {
       return `### ${component}
 
-- ${changelogs.join("\n- ")}
-
----
-
-Full release notes: ${event.client_payload.release.html_url}`;
+- ${changelogs.join("\n- ")}`;
     })
-    .join("\n\n");
+    .join("\n\nFull release notes: ${event.client_payload.release.html_url}");
 }
 
 function yamlEscape(string) {
