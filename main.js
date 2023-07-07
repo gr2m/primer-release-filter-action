@@ -51,16 +51,20 @@ export function main(core, event) {
   );
   core.setOutput(
     "changelogsByComponentMarkdown",
-    yamlEscape(toMarkdown(changelogsByComponent))
+    yamlEscape(toMarkdown(changelogsByComponent, event))
   );
 }
 
-function toMarkdown(changelogsByComponent) {
+function toMarkdown(changelogsByComponent, event) {
   return Object.entries(changelogsByComponent)
     .map(([component, changelogs]) => {
       return `### ${component}
 
-- ${changelogs.join("\n- ")}`;
+- ${changelogs.join("\n- ")}
+
+---
+
+Full release notes: ${event.client_payload.release.html_url}`;
     })
     .join("\n\n");
 }
