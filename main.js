@@ -64,7 +64,7 @@ function toMarkdown(changelogsByComponent, event) {
 - ${changelogs.join("\n- ")}`;
       })
       .join("\n\n") +
-    "\n\nFull release notes: ${event.client_payload.release.html_url}"
+    `\n\nFull release notes: ${event.client_payload.release.html_url}`
   );
 }
 
