@@ -1,10 +1,12 @@
+// @ts-check
+
 /**
  *
- * @param {core} core
- * @param {import("@octokit/webhooks-types").ReleaseCreatedEvent} event
+ * @param {import("@actions/core")} core
+ * @param {{client_payload: import("@octokit/webhooks-types").ReleaseCreatedEvent}} event
  */
 export function main(core, event) {
-  const body = event.release.body;
+  const body = event.client_payload.release.body;
 
   // get separate changelogs
   const [ignore_, ...changelogs] = body.split(/^-   /gm);
@@ -15,7 +17,7 @@ export function main(core, event) {
     const lines = changelog.split(/\n\s*/).filter(Boolean);
 
     const lastLine = lines.at(-1);
-    if (!lastLine.startsWith("<!-- Changed components:")) {
+    if (!lastLine?.startsWith("<!-- Changed components:")) {
       // ignore changes that didn'd affect any components
       continue;
     }
