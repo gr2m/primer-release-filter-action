@@ -2241,7 +2241,7 @@ function main(core2, event2) {
   );
   core2.setOutput(
     "changelogsByComponentMarkdown",
-    toMarkdown(changelogsByComponent)
+    yamlEscape(toMarkdown(changelogsByComponent))
   );
 }
 function toMarkdown(changelogsByComponent) {
@@ -2250,6 +2250,9 @@ function toMarkdown(changelogsByComponent) {
 
 - ${changelogs.join("\n- ")}`;
   }).join("\n\n");
+}
+function yamlEscape(string) {
+  return string.replace(/"/g, '""');
 }
 
 // run.js
