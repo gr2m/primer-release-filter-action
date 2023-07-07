@@ -2248,12 +2248,8 @@ function toMarkdown(changelogsByComponent, event2) {
   return Object.entries(changelogsByComponent).map(([component, changelogs]) => {
     return `### ${component}
 
-- ${changelogs.join("\n- ")}
-
----
-
-Full release notes: ${event2.client_payload.release.html_url}`;
-  }).join("\n\n");
+- ${changelogs.join("\n- ")}`;
+  }).join("\n\nFull release notes: ${event.client_payload.release.html_url}");
 }
 function yamlEscape(string) {
   return string.replace(/"/g, '""');
