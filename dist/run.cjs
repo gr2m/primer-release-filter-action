@@ -2215,6 +2215,7 @@ function main(core2, event2) {
   const body = event2.client_payload.release.body;
   const [ignore_, ...changelogs] = body.split(/^-   /gm);
   const changelogsByComponent = {};
+  const subscribedToComponents = process.env.INPUT_COMPONENTS.split(/\s*,\s*/);
   for (const changelog of changelogs) {
     const lines = changelog.split(/\n\s*/).filter(Boolean);
     const lastLine = lines.at(-1);
@@ -2227,6 +2228,8 @@ function main(core2, event2) {
       continue;
     }
     for (const component of components) {
+      if (!subscribedToComponents.includes(component))
+        continue;
       changelogsByComponent[component] = changelogsByComponent[component] || [];
       changelogsByComponent[component].push(lines.join("\n"));
     }
